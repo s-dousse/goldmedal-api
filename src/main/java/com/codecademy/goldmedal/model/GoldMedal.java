@@ -3,21 +3,33 @@ package com.codecademy.goldmedal.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 @Entity
+@Table
 public class GoldMedal {
     @Id
     @GeneratedValue
     private Long id;
 
+    @Column(name="YEAR")
     private Integer year;
+    @Column(name="CITY")
     private String city;
+    @Column(name="SEASON")
     private String season;
+    @Column(name="NAME")
     private String name;
+    @Column(name="COUNTRY")
     private String country;
+    @Column(name="GENDER")
     private String gender;
+    @Column(name="SPORT")
     private String sport;
+    @Column(name="DISCIPLINE")
     private String discipline;
+    @Column(name="EVENT")
     private String event;
 
     public GoldMedal() {
