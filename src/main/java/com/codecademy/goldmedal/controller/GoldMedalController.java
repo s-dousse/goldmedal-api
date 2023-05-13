@@ -41,19 +41,19 @@ public class GoldMedalController {
         List<GoldMedal> medalsList;
         switch (sortBy) {
             case "year":
-                medalsList = // TODO: list of medals sorted by year in the given order
+                medalsList = this.goldmedalRepository.findByCountrySortByYearAsc(countryName);
                 break;
             case "season":
-                medalsList = // TODO: list of medals sorted by season in the given order
+                medalsList = this.goldmedalRepository.findByCountrySortBySeasonAsc(countryName);
                 break;
             case "city":
-                medalsList = // TODO: list of medals sorted by city in the given order
+                medalsList = this.goldmedalRepository.findByCountrySortByCityAsc(countryName);
                 break;
             case "name":
-                medalsList = // TODO: list of medals sorted by athlete's name in the given order
+                medalsList = this.goldmedalRepository.findByCountrySortByNameAsc(countryName);
                 break;
             case "event":
-                medalsList = // TODO: list of medals sorted by event in the given order
+                medalsList = this.goldmedalRepository.findByCountrySortByEventAsc(countryName);
                 break;
             default:
                 medalsList = new ArrayList<>();
