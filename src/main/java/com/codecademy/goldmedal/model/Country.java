@@ -1,5 +1,6 @@
 package com.codecademy.goldmedal.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,9 +12,14 @@ public class Country {
     @GeneratedValue
     private Long id;
 
+    @Column(name="NAME")
     private String name;
+
+    @Column(name="CODE")
     private String code;
+    @Column(name="GDP")
     private BigDecimal gdp;
+    @Column(name="POPULATION")
     private Integer population;
 
     public Country() {

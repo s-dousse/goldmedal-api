@@ -4,18 +4,22 @@ import com.codecademy.goldmedal.model.*;
 import org.apache.commons.text.WordUtils;
 import org.springframework.web.bind.annotation.*;
 import com.codecademy.goldmedal.repositories.GoldMedalRepository;
+import com.codecademy.goldmedal.repositories.CountryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/countries")
 public class GoldMedalController {
     private GoldMedalRepository goldMedalRepository;
+    private CountryRepository countryRepository;
 
-    public GoldMedalController(GoldMedalRepository goldMedalRepository) {
+    public GoldMedalController(GoldMedalRepository goldMedalRepository, CountryRepository countryRepository) {
         this.goldMedalRepository = goldMedalRepository;
+        this.countryRepository = countryRepository;
     }
 
     @GetMapping
@@ -64,28 +68,27 @@ public class GoldMedalController {
     }
 
     private CountryDetailsResponse getCountryDetailsResponse(String countryName) {
-        var countryOptional = // TODO: get the country; this repository method should return a java.util.Optional
+        Optional<Country> countryOptional = this.countryRepository.findByName(countryName);
         if (countryOptional.isEmpty()) {
             return new CountryDetailsResponse(countryName);
         }
 
-        var country = countryOptional.get();
-        var goldMedalCount = // TODO: get the medal count
+        Country country = countryOptional.get();
+        Integer goldMedalCount = this.goldMedalRepository.findByCountry(countryName).size();
 
-        var summerWins = // TODO: get the collection of wins at the Summer Olympics, sorted by year in ascending order
-        var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null;
-        var totalSummerEvents = // TODO: get the total number of events at the Summer Olympics
-        var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
-        var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
+        List<GoldMedal> summerWins = this.goldMedalRepository.findByCountryAndSeasonSortByYearAsc(countryName, "summer");
+        Integer numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null; // TODO: find out more about null
+        Integer totalSummerEvents = this.goldMedalRepository.findByEventsAndSeason("olympics", "summer").size();
+        Float percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
+        Integer yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
 
-        var winterWins = // TODO: get the collection of wins at the Winter Olympics
-        var numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
-        var totalWinterEvents = // TODO: get the total number of events at the Winter Olympics, sorted by year in ascending order
-        var percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
-        var yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
-
-        var numberEventsWonByFemaleAthletes = // TODO: get the number of wins by female athletes
-        var numberEventsWonByMaleAthletes = // TODO: get the number of wins by male athletes
+        List<GoldMedal> winterWins = this.goldMedalRepository.findByEventsAndSeason("olympics", "winter");
+        Integer numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
+        Integer totalWinterEvents = this.goldMedalRepository.findByEventsAndSeasonSortByYearAsc("olympics", "winter").size();
+        Float percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
+        Integer yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
+        Integer numberEventsWonByFemaleAthletes = this.goldMedalRepository.findByGender("female").size();
+        Integer numberEventsWonByMaleAthletes = this.goldMedalRepository.findByGender("male").size();
 
         return new CountryDetailsResponse(
                 countryName,
