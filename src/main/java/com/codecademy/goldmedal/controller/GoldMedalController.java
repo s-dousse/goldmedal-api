@@ -3,7 +3,7 @@ package com.codecademy.goldmedal.controller;
 import com.codecademy.goldmedal.model.*;
 import org.apache.commons.text.WordUtils;
 import org.springframework.web.bind.annotation.*;
-import com.codecademy.goldmedal.repositories.GoldmedalRepository;
+import com.codecademy.goldmedal.repositories.GoldMedalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/countries")
 public class GoldMedalController {
-    private GoldmedalRepository goldmedalRepository;
+    private GoldMedalRepository goldMedalRepository;
 
-    public GoldMedalController(GoldmedalRepository goldmedalRepository) {
-        this.goldmedalRepository = goldmedalRepository;
+    public GoldMedalController(GoldMedalRepository goldMedalRepository) {
+        this.goldMedalRepository = goldMedalRepository;
     }
 
     @GetMapping
@@ -41,39 +41,19 @@ public class GoldMedalController {
         List<GoldMedal> medalsList;
         switch (sortBy) {
             case "year":
-                medalsList = if (ascendingOrder) {
-                                this.goldmedalRepository.findByCountrySortByYearAsc(countryName);
-                            } else {
-                                this.goldmedalRepository.findByCountrySortByYearDesc(countryName);
-                            }
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountrySortByYearAsc(countryName) : this.goldMedalRepository.findByCountrySortByYearDesc(countryName);
                 break;
             case "season":
-                medalsList = if (ascendingOrder) {
-                                this.goldmedalRepository.findByCountrySortBySeasonAsc(countryName);
-                            else {
-                                this.goldmedalRepository.findByCountrySortBySeasonDesc(countryName);
-                            }
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountrySortBySeasonAsc(countryName) : this.goldMedalRepository.findByCountrySortBySeasonDesc(countryName);
                 break;
             case "city":
-                medalsList = if (ascendingOrder) {
-                                this.goldmedalRepository.findByCountrySortByCityAsc(countryName);
-                            } else {
-                                this.goldmedalRepository.findByCountrySortByCityDesc(countryName);
-                            }
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountrySortByCityAsc(countryName) : this.goldMedalRepository.findByCountrySortByCityDesc(countryName);
                 break;
             case "name":
-                medalsList = if (ascendingOrder) {
-                                this.goldmedalRepository.findByCountrySortByNameAsc(countryName);
-                            } else {
-                                this.goldmedalRepository.findByCountrySortByNameDesc(countryName);
-                            }
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountrySortByNameAsc(countryName) : this.goldMedalRepository.findByCountrySortByNameDesc(countryName);
                 break;
             case "event":
-                medalsList = if (ascendingOrder) {
-                                this.goldmedalRepository.findByCountrySortByEventAsc(countryName);
-                            } else {
-                                this.goldmedalRepository.findByCountrySortByEventDesc(countryName);
-                            }
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountrySortByEventAsc(countryName) : this.goldMedalRepository.findByCountrySortByEventDesc(countryName);
                 break;
             default:
                 medalsList = new ArrayList<>();
