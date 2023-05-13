@@ -41,19 +41,39 @@ public class GoldMedalController {
         List<GoldMedal> medalsList;
         switch (sortBy) {
             case "year":
-                medalsList = this.goldmedalRepository.findByCountrySortByYearAsc(countryName);
+                medalsList = if (ascendingOrder) {
+                                this.goldmedalRepository.findByCountrySortByYearAsc(countryName);
+                            } else {
+                                this.goldmedalRepository.findByCountrySortByYearDesc(countryName);
+                            }
                 break;
             case "season":
-                medalsList = this.goldmedalRepository.findByCountrySortBySeasonAsc(countryName);
+                medalsList = if (ascendingOrder) {
+                                this.goldmedalRepository.findByCountrySortBySeasonAsc(countryName);
+                            else {
+                                this.goldmedalRepository.findByCountrySortBySeasonDesc(countryName);
+                            }
                 break;
             case "city":
-                medalsList = this.goldmedalRepository.findByCountrySortByCityAsc(countryName);
+                medalsList = if (ascendingOrder) {
+                                this.goldmedalRepository.findByCountrySortByCityAsc(countryName);
+                            } else {
+                                this.goldmedalRepository.findByCountrySortByCityDesc(countryName);
+                            }
                 break;
             case "name":
-                medalsList = this.goldmedalRepository.findByCountrySortByNameAsc(countryName);
+                medalsList = if (ascendingOrder) {
+                                this.goldmedalRepository.findByCountrySortByNameAsc(countryName);
+                            } else {
+                                this.goldmedalRepository.findByCountrySortByNameDesc(countryName);
+                            }
                 break;
             case "event":
-                medalsList = this.goldmedalRepository.findByCountrySortByEventAsc(countryName);
+                medalsList = if (ascendingOrder) {
+                                this.goldmedalRepository.findByCountrySortByEventAsc(countryName);
+                            } else {
+                                this.goldmedalRepository.findByCountrySortByEventDesc(countryName);
+                            }
                 break;
             default:
                 medalsList = new ArrayList<>();
