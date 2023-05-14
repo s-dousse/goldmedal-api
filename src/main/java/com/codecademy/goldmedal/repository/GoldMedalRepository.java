@@ -1,4 +1,4 @@
-package com.codecademy.goldmedal.repositories;
+package com.codecademy.goldmedal.repository;
 
 import com.codecademy.goldmedal.model.GoldMedal;
 import org.springframework.data.repository.CrudRepository;

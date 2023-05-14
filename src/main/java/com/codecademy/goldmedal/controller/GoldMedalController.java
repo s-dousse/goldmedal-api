@@ -1,16 +1,14 @@
 package com.codecademy.goldmedal.controller;
 
 import com.codecademy.goldmedal.model.*;
+import com.codecademy.goldmedal.repository.CountryRepository;
+import com.codecademy.goldmedal.repository.GoldMedalRepository;
 import org.apache.commons.text.WordUtils;
 import org.springframework.web.bind.annotation.*;
-import com.codecademy.goldmedal.repositories.GoldMedalRepository;
-import com.codecademy.goldmedal.repositories.CountryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping("/countries")
 public class GoldMedalController {
@@ -68,27 +66,27 @@ public class GoldMedalController {
     }
 
     private CountryDetailsResponse getCountryDetailsResponse(String countryName) {
-        Optional<Country> countryOptional = this.countryRepository.findByName(countryName);
+        var countryOptional = countryRepository.getByName(countryName);
         if (countryOptional.isEmpty()) {
             return new CountryDetailsResponse(countryName);
         }
 
-        Country country = countryOptional.get();
-        Integer goldMedalCount = this.goldMedalRepository.findByCountry(countryName).size();
+        var country = countryOptional.get();
+        var goldMedalCount = this.goldMedalRepository.findByCountry(countryName).size();
 
-        List<GoldMedal> summerWins = this.goldMedalRepository.findByCountryAndSeasonSortByYearAsc(countryName, "summer");
-        Integer numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null; // TODO: find out more about null
-        Integer totalSummerEvents = this.goldMedalRepository.findByEventsAndSeason("olympics", "summer").size();
-        Float percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
-        Integer yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
+        var summerWins = this.goldMedalRepository.findByCountryAndSeasonSortByYearAsc(countryName, "summer");
+        var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null; // TODO: find out more about null
+        var totalSummerEvents = this.goldMedalRepository.findByEventsAndSeason("olympics", "summer").size();
+        var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
+        var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
 
-        List<GoldMedal> winterWins = this.goldMedalRepository.findByEventsAndSeason("olympics", "winter");
-        Integer numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
-        Integer totalWinterEvents = this.goldMedalRepository.findByEventsAndSeasonSortByYearAsc("olympics", "winter").size();
-        Float percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
-        Integer yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
-        Integer numberEventsWonByFemaleAthletes = this.goldMedalRepository.findByGender("female").size();
-        Integer numberEventsWonByMaleAthletes = this.goldMedalRepository.findByGender("male").size();
+        var winterWins = this.goldMedalRepository.findByEventsAndSeason("olympics", "winter");
+        var numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
+        var totalWinterEvents = this.goldMedalRepository.findByEventsAndSeasonSortByYearAsc("olympics", "winter").size();
+        var percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
+        var yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
+        var numberEventsWonByFemaleAthletes = this.goldMedalRepository.findByGender("female").size();
+        var numberEventsWonByMaleAthletes = this.goldMedalRepository.findByGender("male").size();
 
         return new CountryDetailsResponse(
                 countryName,

@@ -7,3 +7,5 @@
 /Users/sdousse/Downloads/goldmedal/src/main/java/com/codecademy/goldmedal/model/Country.java
 /Users/sdousse/Downloads/goldmedal/src/main/java/com/codecademy/goldmedal/controller/GoldMedalController.java
 /Users/sdousse/Downloads/goldmedal/src/main/java/com/codecademy/goldmedal/model/CountryMedalsListResponse.java
+/Users/sdousse/Downloads/goldmedal/src/main/java/com/codecademy/goldmedal/repository/GoldMedalRepository.java
+/Users/sdousse/Downloads/goldmedal/src/main/java/com/codecademy/goldmedal/repository/CountryRepository.java
