@@ -56,3 +56,8 @@ Temporary Items
 ### macOS Patch ###
 # iCloud generated files
 *.icloud
+target
+
+# JS FrontEnd
+.idea/vcs.xml
+.js

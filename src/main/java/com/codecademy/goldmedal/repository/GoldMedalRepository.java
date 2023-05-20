@@ -5,19 +5,19 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface GoldMedalRepository extends CrudRepository<GoldMedal, Integer> {
-    public List<GoldMedal> getByCountryOrderByYearAsc(String country);
-    public List<GoldMedal> getByCountryOrderByYearDesc(String country);
-    public List<GoldMedal> getByCountryOrderBySeasonAsc(String country);
-    public List<GoldMedal> getByCountryOrderBySeasonDesc(String country);
-    public List<GoldMedal> getByCountryOrderByCityAsc(String country);
-    public List<GoldMedal> getByCountryOrderByCityDesc(String country);
-    public List<GoldMedal> getByCountryOrderByNameAsc(String country);
-    public List<GoldMedal> getByCountryOrderByNameDesc(String country);
-    public List<GoldMedal> getByCountryOrderByEventAsc(String country);
-    public List<GoldMedal> getByCountryOrderByEventDesc(String country);
-    public List<GoldMedal> findByCountry(String country);
-    public List<GoldMedal> getByCountryAndSeasonOrderByYearAsc(String country, String season);
-    public List<GoldMedal> findByEventAndSeason(String event, String season);
-    public List<GoldMedal> getByEventAndSeasonOrderByYearAsc(String event, String season);
-    public List<GoldMedal> findByGender(String gender);
+    List<GoldMedal> getByCountryOrderByYearAsc(String country);
+    List<GoldMedal> getByCountryOrderByYearDesc(String country);
+    List<GoldMedal> getByCountryOrderBySeasonAsc(String country);
+    List<GoldMedal> getByCountryOrderBySeasonDesc(String country);
+    List<GoldMedal> getByCountryOrderByCityAsc(String country);
+    List<GoldMedal> getByCountryOrderByCityDesc(String country);
+    List<GoldMedal> getByCountryOrderByNameAsc(String country);
+    List<GoldMedal> getByCountryOrderByNameDesc(String country);
+    List<GoldMedal> getByCountryOrderByEventAsc(String country);
+    List<GoldMedal> getByCountryOrderByEventDesc(String country);
+    List<GoldMedal> getByCountryAndSeasonOrderByYearAsc(String country, String season);
+    List<GoldMedal> findByCountry(String country);
+    int countByCountry(String country);
+    int countBySeason(String season);
+    int countByCountryAndGender(String country, String gender);
 }
